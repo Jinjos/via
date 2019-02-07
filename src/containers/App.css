@@ -1,0 +1,13 @@
+.contact-list {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-gap: 10px;
+}
+.contact {
+  height: 15vh;
+}
+
+.contact > img {
+  max-width: 100%;
+  max-height: 100%;
+}
