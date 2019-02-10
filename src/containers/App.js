@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import CardList from '../components/ContactList';
+import ContactList from '../components/ContactList';
 import SearchBox from '../components/SearchBox';
-import Scroll from '../components/Scroll';
 import './App.css';
 
 class App extends Component {
@@ -9,6 +8,7 @@ class App extends Component {
     super();
     this.state = {
       users: [],
+      pending: true,
       searchfield: ''
     };
   }
@@ -17,8 +17,9 @@ class App extends Component {
     const resp = await fetch(
       'http://private-05627-frontendnewhire.apiary-mock.com/contact_list'
     );
-    const ret = await resp.json();
-    this.setState({ users: ret });
+    console.log(resp);
+    const ret = !resp.ok ? [] : await resp.json();
+    this.setState({ users: ret, pending: false });
   }
 
   onSearchChange = event => {
@@ -30,16 +31,20 @@ class App extends Component {
     const filteredUsers = users.filter(user => {
       return user.name.toLowerCase().includes(searchfield.toLowerCase());
     });
-    return !users.length ? (
-      <h1>Loading</h1>
-    ) : (
-      <div className="tc">
-        <h1 className="f1">Contact List</h1>
-        <SearchBox searchChange={this.onSearchChange} />
-        <Scroll>
-          <CardList users={filteredUsers} />
-        </Scroll>
+    return this.state.pending ? (
+      <div className="loading-page flex-center">
+        <h1>Loading Page</h1>
       </div>
+    ) : (
+      <React.Fragment>
+        <header className="flex-space-between">
+          <h2>Contact List</h2>
+          <SearchBox searchChange={this.onSearchChange} />
+        </header>
+        <div className="contacts">
+          <ContactList users={filteredUsers} />
+        </div>
+      </React.Fragment>
     );
   }
 }

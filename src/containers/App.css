@@ -1,16 +1,43 @@
-.contact-list {
+#root {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  grid-gap: 10px;
+  grid-auto-rows: 8vh 92vh;
+  overflow: hidden;
 }
-.contact {
-  height: 15vh;
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-
-.contact > img {
+.flex-space-between {
+  display: flex;
+  justify-content: space-between;
+}
+img {
   max-width: 100%;
   max-height: 100%;
 }
-.hidden {
-  display: none;
+.loading-page {
+  height: 100vh;
+  flex-direction: column;
+}
+header {
+  background: #3f51b5;
+  color: #fff;
+  padding: 0 1vw;
+  align-items: center;
+}
+.contacts {
+  overflow: auto;
+  padding: 1rem;
+}
+
+.contact-type {
+  height: 50px;
+  width: 50px;
+  position: absolute;
+  top: -25px;
+  left: 0;
+}
+.contact-data {
+  position: relative;
 }

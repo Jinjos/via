@@ -1,16 +1,19 @@
 import React from 'react';
+import { InputGroup, FormControl } from 'react-bootstrap';
 
 const SearchBox = ({ searchfield, searchChange }) => {
   return (
-    <div className='pa2'>
-      <input
-        className='pa3 ba b--green bg-lightest-blue'
-        type='search'
-        placeholder='search people'
-        onChange={searchChange}
-      />
+    <div>
+      <InputGroup>
+        <FormControl
+          placeholder="Search people"
+          aria-label="Search"
+          aria-describedby="basic-addon1"
+          onChange={searchChange}
+        />
+      </InputGroup>
     </div>
   );
-}
+};
 
 export default SearchBox;
